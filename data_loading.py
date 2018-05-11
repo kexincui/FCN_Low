@@ -95,20 +95,22 @@ class MultiDataSet(data.Dataset):
    
     def __getitem__(self, index):
         Satsample = Image.open(join(self.fileDir,'Sat/'+self.image_filenames[index]))
+        Satsample = Satsample.resize((256,256), Image.NEAREST)
         if self.testFlag == False:
             labelsamplename= find_label_map_name(self.image_filenames[index],self.labelExtension)
             labelsample = Image.open(join(self.fileDir,'Label/'+labelsamplename))     
+            labelsample = labelsample.resize((256,256), Image.NEAREST)
         if self.transform:
             Satsample = self.transform(Satsample)
-            if self.testFlag == False:
-                labelsample = self.transform(labelsample)                                 
-        Satsample = np.array(Satsample).transpose((2,0,1)) 
+#             if self.testFlag == False:
+#                 labelsample = self.transform(labelsample)                                 
+#         Satsample = np.array(Satsample).transpose((2,0,1)) 
         l,w=Satsample.shape[1],Satsample.shape[2]
         classmap=np.zeros(shape=(l,w))
         if self.testFlag == False:                                  
             labelsample = np.array(labelsample).transpose((2,0,1))
             classmap = RGB_mapping_to_class(labelsample)
-        sample = {'satellite':torch.Tensor(Satsample),'class':torch.Tensor(classmap)} 
+        sample = {'satellite':torch.Tensor(Satsample),'class':torch.LongTensor(classmap)} 
         # colmap = classToRGB(label)
         # plt.imshow(colmap)
         # plt.show() 

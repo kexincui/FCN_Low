@@ -8,10 +8,13 @@ import torch.optim as optim
 import torchvision.utils as utils
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
-from tensorboardX import SummaryWriter
+# from tensorboardX import SummaryWriter
+from torchvision.transforms import Compose, CenterCrop, Normalize
+from torchvision.transforms import ToTensor
 # from model import *
 from fcn import *
 from data_loading import *
+from criterion import *
 from torchvision import transforms
 import matplotlib.pyplot as plt
 
@@ -33,17 +36,23 @@ args = easydict.EasyDict({
         "outf": "logs",
 })
 
+input_transform = Compose([
+    ToTensor(),
+    Normalize([.485, .456, .406], [.229, .224, .225]),
+])
+
+
 # Load Dataset
 # dataset_train = MultiDataSet("/home/ckx9411sx/deepGlobe/land-train")
-dataset_train = MultiDataSet("/home/ckx9411sx/deepGlobe/resize")
-dataset_test = MultiDataSet("/home/ckx9411sx/deepGlobe/land-train", '.jpg', True, transform = transforms.Resize((2448,2448)))
+dataset_train = MultiDataSet("/scratch/user/jiangziyu/dataSate/", transform = input_transform)
+dataset_test = MultiDataSet("/scratch/user/jiangziyu/dataSate/", '.jpg', True, transform = transforms.Resize((2448,2448)))
 
 loader_train = DataLoader(dataset=dataset_train, num_workers=4, batch_size=args.batchsize, shuffle=True)
 loader_test  = DataLoader(dataset=dataset_test,num_workers=4, batch_size = 1, shuffle = False)
 print("# of training samples: %d\n" % int(len(dataset_train)))
 
 # Build Model
-model = UNet(7).cuda()
+model = FCN8(7).cuda()
 print(model)
 
 
@@ -57,8 +66,10 @@ optimizer = optim.Adam(model.parameters(), lr=args.lr)
 # Loss function
 loss_func = nn.L1Loss()
 
+criterion = CrossEntropyLoss2d()
+criterion = criterion.cuda()
 # training
-writer = SummaryWriter(args.outf)
+# writer = SummaryWriter(args.outf)
 step = 0
 
 for epoch in range(args.epochs):
@@ -70,35 +81,35 @@ for epoch in range(args.epochs):
         for param_group in optimizer.param_groups:
             param_group["lr"] = current_lr
         print('learning rate %f' % current_lr)
-        
+        model.train()
         for i, data in enumerate(loader_train):
             # training step
             # print(i)
-            model.train()
-            model.zero_grad()
+            
+            
             optimizer.zero_grad()
             img_train = data
             satellite_img,class_img = Variable(img_train['satellite'].cuda()), Variable(img_train['class'].cuda())
             # print("****************************")
             out_train = model(satellite_img)
-            loss = loss_func(out_train,class_img)
+            loss = criterion(out_train, class_img)
             loss.backward()
             optimizer.step()
             
-            model.eval()
-            out_train = torch.clamp(model(satellite_img), 1., 7.)
-            print("[epoch %d][%d/%d] loss: %.4f" %
-                (epoch+1, i+1, len(loader_train), loss.data[0]))
-            if step % 10 == 0:
-                # Log the scalar values
-                writer.add_scalar('loss', loss.data[0], step)
-            step += 1
-        ## the end of each epoch
-model.eval()
+#             model.eval()
+#             out_train = torch.clamp(model(satellite_img), 1., 7.)
+#             print("[epoch %d][%d/%d] loss: %.4f" %
+#                 (epoch+1, i+1, len(loader_train), loss.data[0]))
+#             if step % 10 == 0:
+#                 # Log the scalar values
+#                 writer.add_scalar('loss', loss.data[0], step)
+#             step += 1
+#         ## the end of each epoch
+# model.eval()
 
-for i, data in enumerate(loader_test):
-    img_test = data
-    satellite_img_test = Variable(img_test['satellite'].cuda())
-    out_test = torch.clamp(model(satellite_img_test), 1., 7.)
-    with open('test.txt', 'w') as outfile:
-        outfile.write("%d\n" % out_test)
+# for i, data in enumerate(loader_test):
+#     img_test = data
+#     satellite_img_test = Variable(img_test['satellite'].cuda())
+#     out_test = torch.clamp(model(satellite_img_test), 1., 7.)
+#     with open('test.txt', 'w') as outfile:
+#         outfile.write("%d\n" % out_test)
