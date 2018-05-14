@@ -41,7 +41,7 @@ def RGB_mapping_to_class(label):
         classmap[indices[0].tolist(),indices[1].tolist()]=6
     indices = np.where(np.all(label == (0,0,0), axis=-1))
     if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=7
+        classmap[indices[0].tolist(),indices[1].tolist()]=0
 #     plt.imshow(colmap)
 #     plt.show()
     return classmap
@@ -91,7 +91,7 @@ class MultiDataSet(data.Dataset):
         self.testFlag = testFlag
         self.image_filenames  = [image_name for image_name in listdir(fileDir+'/Sat') if is_image_file(image_name)]
         self.transform = transform
-        self.classdict = {1:"urban",2:"agriculture",3:"rangeland",4:"forest",5:"water",6:"barren",7:"unknown"}
+        self.classdict = {1:"urban",2:"agriculture",3:"rangeland",4:"forest",5:"water",6:"barren",0:"unknown"}
    
     def __getitem__(self, index):
         Satsample = Image.open(join(self.fileDir,'Sat/'+self.image_filenames[index]))
