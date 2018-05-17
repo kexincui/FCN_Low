@@ -34,6 +34,7 @@ class FCN8(nn.Module):
         self.score_feat4 = nn.Conv2d(512, num_classes, 1)
         self.score_fconn = nn.Conv2d(4096, num_classes, 1)
 
+
     def forward(self, x):
         feats = self.feats(x)
         feat3 = self.feat3(feats)

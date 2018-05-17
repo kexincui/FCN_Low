@@ -10,70 +10,59 @@ import cv2
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
+
 def is_image_file(filename):
     return any(filename.endswith(extension) for extension in [".png", ".jpg", ".jpeg"])
+
 
 def find_label_map_name(img_filenames,labelExtension = ".png"):
     img_filenames = img_filenames.replace('_sat.jpg','_mask')
     return img_filenames + labelExtension
+
 
 def RGB_mapping_to_class(label):
     label=label.transpose((1,2,0))
     l,w = label.shape[0],label.shape[1]
     classmap = np.zeros(shape=(l,w))
     indices = np.where(np.all(label == (0,255,255), axis=-1))
-    if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=1
+    classmap[indices[0].tolist(),indices[1].tolist()]=1
     indices = np.where(np.all(label == (255,255,0), axis=-1))
-    if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=2
+    classmap[indices[0].tolist(),indices[1].tolist()]=2
     indices = np.where(np.all(label == (255,0,255), axis=-1))
-    if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=3
+    classmap[indices[0].tolist(),indices[1].tolist()]=3
     indices = np.where(np.all(label == (0,255,0), axis=-1))
-    if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=4
+    classmap[indices[0].tolist(),indices[1].tolist()]=4
     indices = np.where(np.all(label == (0,0,255), axis=-1))
-    if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=5
+    classmap[indices[0].tolist(),indices[1].tolist()]=5
     indices = np.where(np.all(label == (255,255,255), axis=-1))
-    if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=6
+    classmap[indices[0].tolist(),indices[1].tolist()]=6
     indices = np.where(np.all(label == (0,0,0), axis=-1))
-    if len(indices[0])!=0:
-        classmap[indices[0].tolist(),indices[1].tolist()]=0
+    classmap[indices[0].tolist(),indices[1].tolist()]=0
 #     plt.imshow(colmap)
 #     plt.show()
     return classmap
 
-# def classToRGB(label):
-#     label=label.transpose((1,2,0))
-#     l,w = label.shape[0],label.shape[1]
-#     colmap = np.zeros(shape=(l,w,3))
-#     indices = np.where(np.all(label == (0,255,255), axis=-1))
-#     if len(indices[0])!=0:
-#         colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,255,255]
-#     indices = np.where(np.all(label == (255,255,0), axis=-1))
-#     if len(indices[0])!=0:
-#         colmap[indices[0].tolist(),indices[1].tolist(),:]=[255,255,0]
-#     indices = np.where(np.all(label == (255,0,255), axis=-1))
-#     if len(indices[0])!=0:
-#         colmap[indices[0].tolist(),indices[1].tolist(),:]=[255,0,255]
-#     indices = np.where(np.all(label == (0,255,0), axis=-1))
-#     if len(indices[0])!=0:
-#         colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,255,0]
-#     indices = np.where(np.all(label == (0,0,255), axis=-1))
-#     if len(indices[0])!=0:
-#         colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,0,255]
-#     indices = np.where(np.all(label == (255,255,255), axis=-1))
-#     if len(indices[0])!=0:
-#         colmap[indices[0].tolist(),indices[1].tolist(),:]=[255,255,255]
-#     indices = np.where(np.all(label == (0,0,0), axis=-1))
-#     if len(indices[0])!=0:
-#         colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,0,0]
-# #     plt.imshow(colmap)
-# #     plt.show()
-#     return colmap
+def classToRGB(label):
+    l,w = label.shape[0],label.shape[1]
+    colmap = np.zeros(shape=(l,w,3))
+    indices = np.where(label == 1)
+    colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,255,255]
+    indices = np.where(label == 2)
+    colmap[indices[0].tolist(),indices[1].tolist(),:]=[255,255,0]
+    indices = np.where(label == 3)
+    colmap[indices[0].tolist(),indices[1].tolist(),:]=[255,0,255]
+    indices = np.where(label == 4)
+    colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,255,0]
+    indices = np.where(label == 5)
+    colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,0,255]
+    indices = np.where(label == 6)
+    colmap[indices[0].tolist(),indices[1].tolist(),:]=[255,255,255]
+    indices = np.where(label == 0)
+    colmap[indices[0].tolist(),indices[1].tolist(),:]=[0,0,0]
+#     plt.imshow(colmap)
+#     plt.show()
+    return colmap.astype(np.uint8)
+
 
 class MultiDataSet(data.Dataset):
     """input and label image dataset"""
@@ -102,9 +91,6 @@ class MultiDataSet(data.Dataset):
             labelsample = labelsample.resize((256,256), Image.NEAREST)
         if self.transform:
             Satsample = self.transform(Satsample)
-#             if self.testFlag == False:
-#                 labelsample = self.transform(labelsample)                                 
-#         Satsample = np.array(Satsample).transpose((2,0,1)) 
         l,w=Satsample.shape[1],Satsample.shape[2]
         classmap=np.zeros(shape=(l,w))
         if self.testFlag == False:                                  
