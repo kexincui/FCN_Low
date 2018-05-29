@@ -13,9 +13,9 @@ class Options(object):
         self.parser.add_argument('--dataroot', required=True,
                                  help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
         self.parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
-        self.parser.add_argument('--loadSizeX', type=int, default=1224, help='scale images to this size')
-        self.parser.add_argument('--loadSizeY', type=int, default=1224, help='scale images to this size')
-        self.parser.add_argument('--fineSize', type=int, default=512, help='then crop to this size')
+        self.parser.add_argument('--loadSizeX', type=int, default=400, help='scale images to this size')
+        self.parser.add_argument('--loadSizeY', type=int, default=400, help='scale images to this size')
+        self.parser.add_argument('--fineSize', type=int, default=400, help='then crop to this size')
         self.parser.add_argument('--name', type=str, default='experiment_name',
                                  help='name of the experiment. It decides where to store samples and models')
         self.parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are saved here')
@@ -49,6 +49,7 @@ class Options(object):
         utils.mkdirs(expr_dir)
         file_name = os.path.join(expr_dir, 'opt.txt')
         self.opt.log_name = os.path.join(expr_dir, 'loss.txt')
+        self.opt.train = True
         with open(file_name, 'wt') as opt_file:
             opt_file.write('------------ Options -------------\n')
             for k, v in sorted(args.items()):

@@ -2,25 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="018163dd-a923-43f0-9e76-93dd8301bb27" name="Default" comment="some changes testing pycharm">
-      <change afterPath="$PROJECT_DIR$/jobSubmit.slurm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visualizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_loading.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_loading.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525978610.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525979827.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525979985.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525980087.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525980162.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525980902.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525980934.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525980974.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525981042.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525981132.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525981601.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525981790.u102306" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/events.out.tfevents.1525983164.u102306" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobSubmit.slurm" beforeDir="false" afterPath="$PROJECT_DIR$/jobSubmit.slurm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/options.py" beforeDir="false" afterPath="$PROJECT_DIR$/options.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,11 +39,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="train.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="train.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="52" column="88" selection-start-line="52" selection-start-column="88" selection-end-line="52" selection-end-column="88" />
+            <state relative-caret-position="1298">
+              <caret line="71" column="23" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="38" column="12" lean-forward="true" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -67,8 +66,8 @@
       <file leaf-file-name="data_loading.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data_loading.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="95" column="64" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="64" />
+            <state relative-caret-position="2156">
+              <caret line="107" column="33" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="33" />
               <folding>
                 <element signature="e#17#39#0" expanded="true" />
               </folding>
@@ -76,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jobSubmit.slurm" pinned="false" current-in-tab="false">
+      <file leaf-file-name="jobSubmit.slurm" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jobSubmit.slurm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+            <state relative-caret-position="440">
+              <caret line="20" column="109" selection-start-line="20" selection-start-column="109" selection-end-line="20" selection-end-column="109" />
             </state>
           </provider>
         </entry>
@@ -88,8 +87,8 @@
       <file leaf-file-name="options.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/options.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="818">
-              <caret line="50" column="49" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="49" />
+            <state relative-caret-position="210">
+              <caret line="26" column="47" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="47" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -117,6 +116,7 @@
       <find>save_network</find>
       <find>fileDir</find>
       <find>print</find>
+      <find>img_train</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -137,9 +137,10 @@
         <option value="$PROJECT_DIR$/list_file/test_list" />
         <option value="$PROJECT_DIR$/visualizer.py" />
         <option value="$PROJECT_DIR$/data_loading.py" />
-        <option value="$PROJECT_DIR$/options.py" />
-        <option value="$PROJECT_DIR$/jobSubmit.slurm" />
         <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/options.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/jobSubmit.slurm" />
       </list>
     </option>
   </component>
@@ -153,10 +154,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="479" />
-    <option name="y" value="327" />
-    <option name="width" value="1390" />
-    <option name="height" value="960" />
+    <option name="x" value="499" />
+    <option name="y" value="128" />
+    <option name="width" value="1388" />
+    <option name="height" value="952" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -167,7 +168,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -183,6 +183,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,7 +251,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.502965" side_tool="true" weight="0.2952675" />
@@ -312,16 +312,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="some changes testing pycharm" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1452">
-          <caret line="78" column="26" selection-start-line="78" selection-start-column="16" selection-end-line="78" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data_loading.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2354">
@@ -693,13 +683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/visualizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -707,40 +690,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobSubmit.slurm">
+    <entry file="file://$PROJECT_DIR$/visualizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="21" column="14" selection-start-line="21" selection-start-column="14" selection-end-line="21" selection-end-column="14" />
+        <state relative-caret-position="176">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/options.py">
+    <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="818">
-          <caret line="50" column="49" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="49" />
+        <state relative-caret-position="1298">
+          <caret line="71" column="23" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data_loading.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="95" column="64" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="64" />
+        <state relative-caret-position="2156">
+          <caret line="107" column="33" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="33" />
           <folding>
             <element signature="e#17#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$PROJECT_DIR$/options.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="52" column="88" selection-start-line="52" selection-start-column="88" selection-end-line="52" selection-end-column="88" />
+        <state relative-caret-position="210">
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="38" column="12" lean-forward="true" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jobSubmit.slurm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" column="109" selection-start-line="20" selection-start-column="109" selection-end-line="20" selection-end-column="109" />
         </state>
       </provider>
     </entry>

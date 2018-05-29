@@ -88,7 +88,7 @@ class MultiDataSet(data.Dataset):
         transform(callable, optional): Optional transform to be applied on a sample
         """
         self.opt = opt
-        self.fileDir = join(opt.dataroot, "train")
+        self.fileDir = join(opt.dataroot, "train" if opt.train == True else "test")
         self.labelExtension = labelExtension
         self.testFlag = testFlag
         self.image_filenames  = [image_name for image_name in listdir(self.fileDir+'/Sat') if is_image_file(image_name)]

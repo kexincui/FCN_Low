@@ -12,14 +12,6 @@ from options import Options
 import time
 import visualizer
 
-opt = Options().parse()
-vis = visualizer.Visualizer(opt)
-input_transform = Compose([
-    ToTensor(),
-    Normalize([.485, .456, .406], [.229, .224, .225]),
-])
-
-
 def load_network(opt, network, network_label, epoch_label):
     save_filename = '%s_net_%s.pth' % (epoch_label, network_label)
     save_path = os.path.join(opt.checkpoints_dir, opt.name, save_filename)
@@ -32,6 +24,15 @@ def save_network(opt, network, network_label, epoch_label):
     torch.save(network.cpu().state_dict(), save_path)
     if torch.cuda.is_available():
         network.cuda()
+
+
+
+opt = Options().parse()
+vis = visualizer.Visualizer(opt)
+input_transform = Compose([
+    ToTensor(),
+    Normalize([.485, .456, .406], [.229, .224, .225]),
+])
 
 # Load Dataset
 dataset_train = MultiDataSet(opt, transform = input_transform)
@@ -50,12 +51,16 @@ if torch.cuda.is_available():
         model.cuda()
         
 # Optimizer
-optimizer = optim.Adam(model.parameters(), lr=opt.lr)   #different with original version
+optimizer = optim.SGD(model.parameters(), opt.lr, .9, 2e-5)
 # Loss function
 criterion = CrossEntropyLoss2d()  # type: CrossEntropyLoss2d
 criterion = criterion.cuda()
 # training
 model.train()
+
+if opt.continue_train:
+    load_network(opt, model, "SateFCN", opt.which_epoch)
+
 
 for epoch in range(opt.epoch_count, opt.niter + opt.niter_decay + 1):
     epoch_start_time = time.time()
@@ -64,8 +69,8 @@ for epoch in range(opt.epoch_count, opt.niter + opt.niter_decay + 1):
         # training step
         epoch_iter += opt.batchSize
         optimizer.zero_grad()
-        img_train = data
-        satellite_img,class_img = Variable(img_train['satellite'].cuda()), Variable(img_train['class'].cuda())
+        img_test = data
+        satellite_img,class_img = Variable(img_test['satellite'].cuda()), Variable(img_test['class'].cuda())
         # print("****************************")
         out_train = model.forward(satellite_img)
         loss = criterion(out_train, class_img)
@@ -85,12 +90,12 @@ for epoch in range(opt.epoch_count, opt.niter + opt.niter_decay + 1):
     # print("Epoch {} model is saved as latest model".format(epoch))
     if epoch > opt.niter:
         current_lr = opt.lr - (opt.lr / opt.niter_decay) * (epoch - opt.niter)
-    # set learning rate
-    for param_group in optimizer.param_groups:
-        param_group["lr"] = current_lr
+        # set learning rate
+        for param_group in optimizer.param_groups:
+            param_group["lr"] = current_lr
+        print('learning rate {}'.format(current_lr), file = open(opt.log_name, "a"))
     if epoch % 10 == 0:
         save_network(opt, model, "SateFCN", epoch)
-    print('learning rate {}'.format(current_lr), file = open(opt.log_name, "a"))
     print('End of epoch %d / %d \t Time Taken: %d sec' %
           (epoch, opt.niter + opt.niter_decay, time.time() - epoch_start_time), file = open(opt.log_name, "a"))
 

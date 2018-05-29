@@ -18,5 +18,5 @@
 
 module load Anaconda/3-5.0.0.1
 source activate ML
-python train.py --dataroot /scratch/user/jiangziyu/data --name FCN8_1224_512
+python train.py --dataroot /scratch/user/jiangziyu/data --name FCN8_400_400 --continue_train --epoch_count 13
 echo job done!
